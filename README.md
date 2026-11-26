@@ -1,21 +1,45 @@
-# React + TypeScript + Vite
+# Paperform Print Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一个面向海外消费者的原创版画选购演示。英文界面，美元计价，尺寸同时标注英寸与厘米。8 款商品的图片随源码提供。所有页面和组件从空目录编写。
 
-While this project uses React, Vite supports many popular JS frameworks. [See all the supported frameworks](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
+## 本地启动
 
-## Deploy Your Own
+使用 Node.js 20.19+ 与 npm。在解压后的项目目录运行：
 
-Deploy your own Vite project with Vercel.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/framework-boilerplates/vite-react&template=vite-react)
-
-_Live Example: https://vite-react-example.vercel.app_
-
-### Deploying From Your Terminal
-
-You can deploy your new Vite project with a single command from your terminal using [Vercel CLI](https://vercel.com/download):
-
-```shell
-$ vercel
+```sh
+npm ci
+npm run dev
 ```
+
+打开终端显示的 Local 地址。首次安装需要联网。应用运行无需 API key、账户、数据库或外部图片服务。
+
+## 检查与部署
+
+```sh
+npm test
+npm run build
+npm run preview
+```
+
+Vite 将生产文件生成到 dist。静态平台设置构建命令为 npm run build、发布目录为 dist，即可部署在域名根路径。提交包内也附带构建好的 dist，可用静态服务器直接预览。
+
+## 核心行为
+
+- 浏览、按主题筛选、按关键词搜索、按起售价排序，支持收藏与空结果恢复。
+- 详情显示纸张、尺寸和对应售价。购物车按商品和尺寸区分，同规格合并，单规格最多 10 件。
+- 金额使用整数美分。标准运费 9 美元，商品小计满 75 美元免运费。税费及进口关税不包含在预估中。
+- 同一浏览器刷新后保留收藏和购物车；读取本地状态时过滤失效款式和无效数量。
+- 手机采用双列商品网格，桌面最多四列。详情和购物车使用原生 dialog，支持键盘操作和 Esc 关闭。
+
+## 代码入口
+
+- src/shop.js — 模拟商品、尺寸、筛选、数量清洗与金额规则
+- src/App.jsx — 目录、商品详情、收藏和购物车
+- src/Modal.jsx、src/Icons.jsx — 对话框与图标
+- src/index.css — 响应式布局
+- public/art — 本次制作的商品图及首页组合图
+- tests/shop.test.js — 业务规则测试
+
+## 范围
+
+英文和美元是本次演示的唯一语言与币种。数据保存在当前浏览器，不跨设备同步。没有收款、下单或真实履约，也不接入实时税费与物流报价。
